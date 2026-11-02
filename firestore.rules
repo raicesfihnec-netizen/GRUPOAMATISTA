@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /respuestas_fihnec/{respuestaId} {
+      // Formulario público: permite enviar respuestas, pero no leerlas ni modificarlas.
+      allow create: if
+        request.resource.data.keys().hasAll([
+          'presupuestoLempiras',
+          'bebidas',
+          'comidas',
+          'horarioViernes',
+          'modalidadAlimentacion',
+          'creadoEn'
+        ]) &&
+        request.resource.data.keys().hasOnly([
+          'presupuestoLempiras',
+          'bebidas',
+          'comidas',
+          'horarioViernes',
+          'modalidadAlimentacion',
+          'creadoEn'
+        ]) &&
+        request.resource.data.presupuestoLempiras is number &&
+        request.resource.data.presupuestoLempiras >= 0 &&
+        request.resource.data.presupuestoLempiras <= 100000 &&
+        request.resource.data.bebidas is list &&
+        request.resource.data.bebidas.size() > 0 &&
+        request.resource.data.comidas is list &&
+        request.resource.data.comidas.size() > 0 &&
+        request.resource.data.horarioViernes is string &&
+        request.resource.data.modalidadAlimentacion is string &&
+        request.resource.data.creadoEn == request.time;
+      allow read, update, delete: if false;
+    }
+  }
+}

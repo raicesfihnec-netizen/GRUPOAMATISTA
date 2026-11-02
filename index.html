@@ -1,0 +1,399 @@
+
+<?php
+// Formulario de investigación de campo - Grupo de Jóvenes FIHNEC
+// Firebase JavaScript SDK guarda las respuestas en Firestore.
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulario de investigación de campo del Grupo de Jóvenes FIHNEC.">
+  <title>Encuesta | Jóvenes FIHNEC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <main class="page">
+    <section class="form-card">
+
+      <header class="brand">
+
+        <img src="Amatista.jpg"
+             alt="Logo de Jóvenes FIHNEC"
+             class="logo"
+             onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='grid';">
+
+        <div id="logo-fallback"
+             class="logo-fallback"
+             aria-label="Espacio para el logo"
+             style="display:none;">
+          FIHNEC
+        </div>
+
+        <span class="eyebrow">GRUPO DE JÓVENES AMATISTA</span>
+
+        <h1>Queremos conocerte</h1>
+
+        <p class="intro">
+          Estamos organizando nuestras actividades y queremos conocer tus preferencias para crear experiencias que disfrutemos todos.
+        </p>
+
+      </header>
+
+      <form id="survey-form">
+
+        <!-- PREGUNTA 1 -->
+        <div class="question">
+
+          <label for="budget">
+            1. ¿Cuánto dinero puedes gastar para cada evento?
+          </label>
+
+          <p class="hint">
+            Indica una cantidad aproximada en lempiras.
+          </p>
+
+          <div class="money-field">
+            <span>L</span>
+
+            <input
+              type="number"
+              id="budget"
+              name="budget"
+              min="0"
+              max="100000"
+              step="1"
+              placeholder="Ej. 150"
+              required
+            >
+          </div>
+
+          <small class="error" data-error-for="budget"></small>
+
+        </div>
+
+
+        <!-- PREGUNTA 2 -->
+        <div class="question">
+
+          <span class="question-title">
+            2. ¿Qué opción prefieres para ingerir bebidas?
+          </span>
+
+          <p class="hint">
+            Puedes seleccionar más de una opción.
+          </p>
+
+          <div class="options">
+
+            <label class="option">
+              <input type="checkbox" name="drinks" value="Agua">
+              <span>Agua</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="drinks" value="Refrescos">
+              <span>Refrescos</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="drinks" value="Jugos naturales">
+              <span>Jugos naturales</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="drinks" value="Café">
+              <span>Café</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="drinks" value="Bebidas energéticas">
+              <span>Bebidas energéticas</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="drinks" value="Otra">
+              <span>Otra</span>
+            </label>
+
+          </div>
+
+          <small class="error" data-error-for="drinks"></small>
+
+        </div>
+
+
+        <!-- PREGUNTA 3 -->
+        <div class="question">
+
+          <span class="question-title">
+            3. ¿Qué opciones de comida te gustan más?
+          </span>
+
+          <p class="hint">
+            Puedes seleccionar más de una opción.
+          </p>
+
+          <div class="options">
+
+            <label class="option">
+              <input type="checkbox" name="foods" value="Baleadas">
+              <span>Baleadas</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="foods" value="Pizza">
+              <span>Pizza</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="foods" value="Hamburguesas">
+              <span>Hamburguesas</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="foods" value="Pollo">
+              <span>Pollo</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="foods" value="Comida típica">
+              <span>Comida típica</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="foods" value="Bocadillos">
+              <span>Bocadillos</span>
+            </label>
+
+            <label class="option">
+              <input type="checkbox" name="foods" value="Otra">
+              <span>Otra</span>
+            </label>
+
+          </div>
+
+          <small class="error" data-error-for="foods"></small>
+
+        </div>
+
+
+        <!-- PREGUNTA 4 -->
+        <div class="question">
+
+          <label for="friday-time">
+            4. ¿Cuál es tu hora más cómoda un viernes?
+          </label>
+
+          <p class="hint">
+            Selecciona el horario que mejor se adapte a ti.
+          </p>
+
+          <select id="friday-time" name="fridayTime" required>
+
+            <option value="">Selecciona un horario</option>
+
+            <option value="5:00 p. m. – 7:00 p. m.">
+              5:00 p. m. – 7:00 p. m.
+            </option>
+
+            <option value="7:00 p. m. – 9:00 p. m.">
+              7:00 p. m. – 9:00 p. m.
+            </option>
+
+            <option value="Después de las 9:00 p. m.">
+              Después de las 9:00 p. m.
+            </option>
+
+            <option value="Cualquier hora">
+              Cualquier hora
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- PREGUNTA 5 -->
+        <div class="question">
+
+          <span class="question-title">
+            5. ¿Qué modalidad de alimentación prefieres?
+          </span>
+
+          <p class="hint">
+            Elige la opción que te resulte más cómoda.
+          </p>
+
+          <div class="radio-options">
+
+            <label class="radio-option">
+
+              <input
+                type="radio"
+                name="foodPayment"
+                value="Pagar un gasto fijo cada semana"
+                required
+              >
+
+              <span>
+                <strong>Gasto fijo semanal</strong>
+                <small>
+                  Pagar una cantidad establecida cada semana.
+                </small>
+              </span>
+
+            </label>
+
+            <label class="radio-option">
+
+              <input
+                type="radio"
+                name="foodPayment"
+                value="Pagar mis propios alimentos"
+              >
+
+              <span>
+                <strong>Pagar mis propios alimentos</strong>
+                <small>
+                  Encargarme del costo de lo que yo consuma.
+                </small>
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- PREGUNTA 6 -->
+        <div class="question">
+
+          <label for="name">
+            6. ¿Cuál es tu nombre?
+          </label>
+
+          <p class="hint">
+            Escribe tu nombre completo.
+          </p>
+
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Ej. Juan Pérez"
+            maxlength="100"
+            autocomplete="name"
+            required
+          >
+
+        </div>
+
+
+        <!-- PREGUNTA 7 -->
+        <div class="question">
+
+          <label for="age">
+            7. ¿Cuál es tu edad?
+          </label>
+
+          <p class="hint">
+            Indica tu edad en años.
+          </p>
+
+          <input
+            type="number"
+            id="age"
+            name="age"
+            min="12"
+            max="100"
+            step="1"
+            placeholder="Ej. 20"
+            required
+          >
+
+        </div>
+
+
+        <!-- PREGUNTA 8 -->
+        <div class="question">
+
+          <label for="phone">
+            8. ¿Nos puedes proporcionar tu número de teléfono?
+          </label>
+
+          <p class="hint">
+            Escribe tu número de teléfono para poder contactarte.
+          </p>
+
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Ej. 9999-9999"
+            maxlength="20"
+            autocomplete="tel"
+            required
+          >
+
+        </div>
+
+
+        <!-- AVISO DE PRIVACIDAD -->
+        <div class="privacy-note">
+
+          <span class="privacy-icon">✓</span>
+
+          <p>
+            Tus respuestas se utilizarán únicamente para organizar y planificar las actividades del grupo.
+          </p>
+
+        </div>
+
+
+        <!-- BOTÓN DE ENVÍO -->
+        <button type="submit" id="submit-btn">
+
+          <span class="btn-text">
+            Enviar respuestas
+          </span>
+
+          <span class="spinner" aria-hidden="true"></span>
+
+          <span aria-hidden="true">→</span>
+
+        </button>
+
+
+        <!-- MENSAJE DEL FORMULARIO -->
+        <div
+          id="form-message"
+          class="form-message"
+          role="status"
+          aria-live="polite">
+        </div>
+
+      </form>
+
+      <footer>
+        Jóvenes FIHNEC <span>·</span> Investigación de campo
+      </footer>
+
+    </section>
+  </main>
+
+
+  <!-- CONEXIÓN CON FIREBASE -->
+  <script type="module" src="firebase.js"></script>
+
+</body>
+</html>
